@@ -9,15 +9,20 @@ class CameraScreen(Screen):
     def start(self):
         self.ids.camera.play=True
         self.ids.camera.texture = self.ids.camera._camera.texture
+        self.ids.camera.opacity = 1
 
     def stop(self):
         self.ids.camera.play=False
         self.ids.camera.texture = None
+        self.ids.camera.opacity = 0
+
 
     def capture(self):
         current_time = time.strftime("%Y%m%d-%H%M%S")
         filename = f"files/{current_time}.png"
         self.ids.camera.export_to_png(filename)
+        self.manager.current = 'image_screen'
+        self.manager.current_screen.ids.img.source = filename
 
 
 
